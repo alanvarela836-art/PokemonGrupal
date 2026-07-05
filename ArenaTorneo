@@ -1,0 +1,31 @@
+package com.pokemon;
+
+/**
+ * Declaramos nuestra clase ArenaTorneo, donde guardaremos los valores de
+ * energia
+ * de cada casilla del mapa, y crearemos un metodo para definir el tamaño de
+ * cada
+ * bioma.
+ */
+public class ArenaTorneo {
+    // Declaramos nuestra matriz irregular, donde guardaremos los valores de energia
+    // de cada casilla del mapa.
+    private int[][] mapaEnergia;
+
+    // Dimension del mapa
+    public void definirZonasCombate(int[] casillasporbioma) {
+        // Inicializamos las filas qye seran cuantos biomas tendremos en el mapa.
+        this.mapaEnergia = new int[casillasporbioma.length][];
+        // Recorremos cada bioma para definir su tamaño independiente.
+        for (int i = 0; i < casillasporbioma.length; i++) {
+            // Cada fila recibe un tamaño distitnto, segun su posicion.
+            this.mapaEnergia[i] = new int[casillasporbioma[i]];
+        }
+    }
+
+    // Getter
+    public int[][] getMapaEnergia() {
+        return mapaEnergia;
+    }
+
+}
