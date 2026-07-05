@@ -1,0 +1,32 @@
+package com.trabajogrupalpokemonarena;
+/** Esta clase es abstracta para que no se pueda crear un objeto Pokemon
+ * Se utiliza el sealed para restringir quien puede heredar los atributos de esta clase
+ * El permits solo dice que se puede usar esta en clase en dichas clases mencionadas  
+ */
+public abstract sealed class Pokemon  permits Pikachu , Charmander , Squirtle , Bulbasaur {
+    // Usamos Encapuslacion para proteger los atributos de la clase Pokemon y que no se pueda modificar desde fuera de la clase.
+    private String nombre ;
+    private int hp ;
+    //Constructor de la clase Pokemon que recibe el nombre y el hp del Pokemon
+    public Pokemon(String nombre, int hp) {
+        this.nombre = nombre;
+        this.hp = hp;
+    }
+    //Metodos get y set para obtener y modificar los atributos de la clase Pokemon
+    public String getNombre() {
+        return nombre;
+    }
+    public int getHp() {
+        return hp;
+    }
+    public void setHp(int hp) {
+        if(hp < 0) {
+            this.hp = hp;
+        }else {
+            this.hp = hp ;
+        }
+    }
+
+    
+    
+}
