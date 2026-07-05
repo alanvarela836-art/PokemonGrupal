@@ -1,0 +1,21 @@
+package com.trabajogrupalpokemonarena;
+
+public final class Bulbasaur extends Pokemon implements AccionCombate {
+    public Bulbasaur(String nombre, int hp) {
+        super("Bulbasaur", 115);
+    }
+
+    @Override
+    public void ejecutar(Pokemon objetivo) {
+        System.out.println(getNombre() + " usa látigo cepa contra " + objetivo.getNombre());
+        objetivo.setHp(objetivo.getHp() - 14);
+        System.out.println(objetivo.getNombre() + " ahora tiene " + objetivo.getHp() + " HP.");
+    }
+    //Habilidad Exclusiva de Bulbasaur que le resta 38 HP al objetivo y lo deja absorbido
+    public void rayoSolar(Pokemon objetivo) {
+        System.out.println("¡¡RAYO SOLAR DEVASTADOR de " + getNombre() + "!!");
+        objetivo.setHp(objetivo.getHp() - 38);
+        System.out.println(objetivo.getNombre() + "  absorbió energía. HP actual:  " + objetivo.getHp() + " HP.");
+    }
+}
+    
