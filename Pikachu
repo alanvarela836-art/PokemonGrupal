@@ -1,0 +1,28 @@
+package com.trabajogrupalpokemonarena;
+/** En esta clase se utiliza final para que sea una clase sellada para que no pueda ser modificada 
+ * Extends Pokemon para que herede los atributos de la clase Pokemon
+ * Implements AccionCombate para que pueda usar los metodos de la interfaz AccionCombate
+ */
+public final class Pikachu extends Pokemon implements AccionCombate {
+   //Constructor de la clase Pikachu que recibe el nombre y el hp del Pokemon
+    public Pikachu(String nombre, int hp) {
+        super("Pikachu", 100);
+    }
+/*Realizamos la sobreescritura del metodo ejecutar de la interfaz AccionCombate para que pueda ser usado por la clase Pikachu
+     * Este metodo recibe un objeto Pokemon como parametro y le resta 15 HP al objetivo
+     * Ademas imprime en consola el nombre del Pokemon que ejecuta el ataque y el nombre del objetivo y su HP restante
+     *
+ */
+    @Override
+    public void ejecutar(Pokemon objetivo) {
+       System.out.println(getNombre() + " usa un ataque básico sobre " + objetivo.getNombre());
+        objetivo.setHp(objetivo.getHp() - 15);
+        System.out.println(objetivo.getNombre() + " ahora tiene " + objetivo.getHp() + " HP.");
+    }
+    // Este metodo es exclusivo de esta clase y realiza un ataque especial llamado Impactrueno que le resta 35 HP al objetivo
+    public void impactotrueno(Pokemon objetivo) {
+        System.out.println("¡¡IMPACTRUENO FULMINANTE de " + getNombre() + "!!");
+        objetivo.setHp(objetivo.getHp() - 35);
+        System.out.println(objetivo.getNombre() + " queda aturdido y con " + objetivo.getHp() + " HP.");
+    }
+}
