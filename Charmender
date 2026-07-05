@@ -1,0 +1,20 @@
+package com.trabajogrupalpokemonarena;
+
+public final class Charmander extends Pokemon implements AccionCombate {
+    public Charmander(String nombre, int hp) {
+        super("Charmender", 110);
+    }
+
+    @Override
+    public void ejecutar(Pokemon objetivo) {
+        System.out.println(getNombre() + " usa un ataque básico sobre " + objetivo.getNombre());
+        objetivo.setHp(objetivo.getHp() - 15);
+        System.out.println(objetivo.getNombre() + " ahora tiene " + objetivo.getHp() + " HP.");
+    }
+    // Habilidad Exclusiva de Charmander que le resta 40 HP al objetivo y lo deja quemado
+    public void lanzallamas(Pokemon objetivo) {
+        System.out.println("¡¡LANZALLAMAS de " + getNombre() + "!!");
+        objetivo.setHp(objetivo.getHp() - 40);
+        System.out.println(objetivo.getNombre() + " queda quemado y con " + objetivo.getHp() + " HP.");
+    }
+}
