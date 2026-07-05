@@ -1,0 +1,6 @@
+package com.trabajogrupalpokemonarena;
+//En esta clase usamos interface para darle un comportamiento a esta  para que se puedan realizar los metodos. 
+public interface AccionCombate {
+    //Este metodo tiene que ser usado por todas las clases que necesiten usar esta accion. 
+    void ejecutar(Pokemon objetivo) ;
+}
