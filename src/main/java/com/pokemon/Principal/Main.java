@@ -1,8 +1,6 @@
 package com.pokemon.Principal;
 
-// Importamos Scanner para poder leer lo que el usuario teclea en la consola
 import java.util.Scanner;
-
 import com.pokemon.Objetos.Charmander;
 import com.pokemon.Objetos.Entrenador;
 import com.pokemon.Objetos.Pikachu;
@@ -16,7 +14,7 @@ import com.pokemon.Recursos.Combate;
  * @author Alan, Maicky, Jade, Christian
  */
 public class Main {
-    // Bloque estático: Le da la bienvenida al usuario apenas arranca el programa, antes de todo
+    // Bloque estático: Le da la bienvenida al usuario apenas arranca el programa
     static {
         System.out.println("=================================================");
         System.out.println("      ¡BIENVENIDO A MINI POKÉMON ARENA!          ");
@@ -24,56 +22,60 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // Instanciamos el Scanner para habilitar la lectura de datos por teclado
+        // Instanciamos el Scanner para leer datos por teclado
         Scanner teclado = new Scanner(System.in);
-        int opcion = 0; // Variable que guardará la opción que elija el usuario
+        int opcion = 0; 
 
-        // PRE-SETUP: Declaramos las variables globales del torneo antes de entrar al menú
+        // Declaramos las variables globales del torneo
         ArenaPokemon arena = new ArenaPokemon();
         Entrenador jugador = new Entrenador("Alan", 100);
         
-        // Al crear los objetos, saltarán los bloques estáticos y de instancia automáticamente
         System.out.println("\n[Fase de Preparación] Inscribiendo competidores...");
+        
+        // Upcasting: Guardamos a los hijos en variables de la superclase
         Pokemon miPika = new Pikachu(); 
         Pokemon rivalCharmander = new Charmander();
         Combate torneo = new Combate();
         
+        // Validación rápida con instanceof en el Main
+        if (miPika instanceof Pikachu) {
+            System.out.println(">> ¡El sistema de la arena ha validado que el retador es un Pikachu!");
+        }
+        if (rivalCharmander instanceof Charmander) {
+            System.out.println(">> ¡Peligro! El sistema detectó un Charmander de fuego como rival.");
+        }
+
         System.out.println("Entrenador oficial: " + jugador.getNombre() + " | HP: " + jugador.getVidaArena());
 
-        // Bucle DO-WHILE: El menú se va a repetir una y otra vez hasta que aplasten el 4 (Salir)
+        // Bucle DO-WHILE: El menú interactivo
         do {
-            // Imprimimos las opciones del menú en la consola
             System.out.println("\n=================================================");
             System.out.println("          MENÚ INTERACTIVO DEL TORNEO            ");
             System.out.println("=================================================");
-            System.out.println("1. Construir Arena Irregular (Parte de Alan)");
-            System.out.println("2. Explorar mapa y usar Baya Misteriosa (Parte Jade/Maicky)");
-            System.out.println("3. Iniciar Combate Oficial (Parte de Christian)");
+            System.out.println("1. Construir Arena Irregular ");
+            System.out.println("2. Explorar mapa y usar Baya Misteriosa ");
+            System.out.println("3. Iniciar Combate Oficial");
             System.out.println("4. Salir del Juego");
-            System.out.print("Elige una opción, pana: ");
+            System.out.print("Elige una opción: ");
             
-            // Leemos el número que el usuario digitó y lo guardamos en 'opcion'
             opcion = teclado.nextInt();
 
-            // Usamos un SWITCH para ejecutar un bloque de código diferente según el número ingresado
             switch (opcion) {
                 case 1:
                     // --- PARTE 1: ARREGLOS ASIMÉTRICOS Y ENCAPSULAMIENTO ---
                     System.out.println("\n--- 1. Inicialización de la Arena Irregular ---");
-                    int[] configBiomas = {2, 4, 3}; // 3 zonas con tamaños diferentes
-                    arena.definirEstructuraArena(configBiomas); // Llamamos a tu método
+                    int[] configBiomas = {2, 4, 3}; 
+                    arena.definirEstructuraArena(configBiomas); 
                     
                     System.out.println("¡Mapa generado con éxito!");
                     System.out.println("Biomas activos en el torneo: " + arena.getMapaCasillas().length);
-                    // Comprobamos el encapsulamiento imprimiendo la vida sin poder modificarla
                     System.out.println("La salud del entrenador se mantiene segura por encapsulamiento: " + jugador.getVidaArena() + " HP.");
                     break;
 
                 case 2:
-                    // --- PARTE 2 y 3: CLASES ANÓNIMAS, INTERFACES Y EVENTOS ---
+                    // --- PARTE 2 y 3: CLASES ANÓNIMAS Y EVENTOS ---
                     System.out.println("\n--- 2. Aparición de Eventos Aleatorios ---");
                     
-                    // Instanciamos la clase anónima "al vuelo" para un efecto temporal
                     AccionCombate eventoBaya = new AccionCombate() {
                         @Override
                         public void ejecutar(Pokemon objetivo) {
@@ -81,36 +83,29 @@ public class Main {
                             System.out.println("Efecto instantáneo: Se restauran 20 puntos de salud a " + objetivo.getNombre());
                         }
                     };
-                    // Ejecutamos el efecto sobre nuestro Pikachu
                     eventoBaya.ejecutar(miPika);
                     break;
 
                 case 3:
-                    // --- PARTE 4: UPCASTING, DOWNCASTING Y COMBATE ---
+                    // --- PARTE 4: MOTOR DE COMBATE ---
                     System.out.println("\n--- 3. Fase de Combate y Habilidades Únicas ---");
                     System.out.println("¡Los entrenadores lanzan sus Pokéballs!");
                     
-                    // Mandamos a pelear a los Pokémon. 
-                    // El método 'iniciarEnfrentamiento' hace el Downcasting por dentro
                     torneo.iniciarEnfrentamiento(miPika, rivalCharmander);
                     
-                    // Simulación de un contraataque
                     System.out.println("\n¡El rival contraataca!");
                     torneo.iniciarEnfrentamiento(rivalCharmander, miPika);
                     break;
 
                 case 4:
-                    // Opción para romper el bucle y terminar el programa limpio
                     System.out.println("\n¡Gracias por jugar! Guardando partida y saliendo del torneo...");
                     break;
 
                 default:
-                    // Si el usuario mete un 5 o un 9, el switch cae aquí para evitar que se caiga el sistema
                     System.out.println("\n[Error] Opción inválida. Ingresa un número del 1 al 4.");
                     break;
             }
         
-        // La condición del bucle: "Mientras la opción NO SEA 4, repite el menú"
         } while (opcion != 4);
 
         teclado.close();
